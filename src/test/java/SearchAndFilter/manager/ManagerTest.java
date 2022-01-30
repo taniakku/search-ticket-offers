@@ -19,25 +19,28 @@ class ManagerTest {
     private RouteOffer fourth = new RouteOffer(4, 2600, "DME", "LED", 220);
     private RouteOffer fifth = new RouteOffer(5, 1200, "SVO", "BER", 770);
     private RouteOffer sixth = new RouteOffer(6, 2200, "DME", "LED", 360);
+    private RouteOffer seventh = new RouteOffer(7, 200, "SVO", "BER", 1900);
+    private RouteOffer eighth = new RouteOffer(8, 130, "SVO", "BER", 3000);
+
 
 
     @BeforeEach
     public void setUp() {
-        repository.save(first);
         repository.save(second);
+        repository.save(first);
         repository.save(third);
         repository.save(fourth);
-        repository.save(fifth);
         repository.save(sixth);
+        repository.save(fifth);
+        repository.save(seventh);
+        repository.save(eighth);
     }
 
     @Test
     void shouldFindSvoAndBer() {
 
-        RouteOffer[] expected = {fifth, second, third};
+        RouteOffer[] expected = {eighth, seventh, fifth, second, third};
         RouteOffer[] actual = manager.searchByFromTo("SVO", "BER");
-
-        Arrays.sort(actual);
 
         assertArrayEquals(expected, actual);
 
@@ -49,24 +52,11 @@ class ManagerTest {
         RouteOffer[] expected = {sixth, fourth, first};
         RouteOffer[] actual = manager.searchByFromTo("DME", "LED");
 
-        Arrays.sort(actual);
-
         assertArrayEquals(expected, actual);
 
 
     }
 
-/*    @Test — оставлю тут закомментированный тест, который всегда должен падать (параметры можно менять)
-    void shouldFail() {
 
-        RouteOffer[] expected = {sixth, fourth, first};
-        RouteOffer[] actual = manager.searchByFromTo("DME", "DME");
-
-        Arrays.sort(actual);
-
-        assertArrayEquals(expected, actual);
-
-
-    }*/
 
 }
