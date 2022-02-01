@@ -23,7 +23,6 @@ class ManagerTest {
     private RouteOffer eighth = new RouteOffer(8, 130, "SVO", "BER", 3000);
 
 
-
     @BeforeEach
     public void setUp() {
         repository.save(second);
@@ -56,7 +55,6 @@ class ManagerTest {
 
 
     }
-
 
 
 }
